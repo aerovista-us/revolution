@@ -803,6 +803,63 @@
       position: relative;
     }
 
+    /* Mobile: wrap into 2 rows */
+    @media (max-width: 720px) {
+      .state-transition-bar {
+        flex-wrap: wrap;
+        padding: 12px 40px 12px 16px; /* Extra right padding for nav button */
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+        min-height: 60px; /* Ensure enough height for 2 rows */
+      }
+
+      /* First row: Chaos → Safety */
+      .state-transition-item.chaos {
+        order: 1;
+      }
+      .state-transition-item.chaos + .state-arrow {
+        order: 2;
+      }
+      .state-transition-item.safety {
+        order: 3;
+      }
+      
+      /* Force line break after Safety by making the arrow take full width */
+      .state-transition-item.safety + .state-arrow {
+        order: 4;
+        flex-basis: 100%;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+      }
+
+      /* Second row: Build → Integration */
+      .state-transition-item.build {
+        order: 5;
+      }
+      .state-transition-item.build + .state-arrow {
+        order: 6;
+      }
+      .state-transition-item.integration {
+        order: 7;
+      }
+
+      /* Adjust item sizes for mobile */
+      .state-transition-item {
+        font-size: 10px;
+        padding: 5px 10px;
+        flex-shrink: 0;
+      }
+
+      .state-arrow {
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+    }
+
     .nav-toggle-btn {
       position: absolute;
       left: 16px;
