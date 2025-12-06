@@ -178,15 +178,7 @@
     }
 
     main {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
-      gap: 24px;
-    }
-
-    @media (max-width: 880px) {
-      main {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      display: block;
     }
 
     .timeline {
@@ -391,6 +383,39 @@
       gap: 12px;
     }
 
+    .player-progress-section {
+      width: 100%;
+    }
+
+    /* Visualizer always full width */
+    .player-controls .visualizer {
+      width: 100%;
+    }
+
+    /* Controls row: version selector and buttons side by side on larger screens */
+    .player-controls-bottom-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @media (min-width: 900px) {
+      .player-controls-bottom-row {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .player-selectors {
+        flex-shrink: 0;
+        min-width: 120px;
+      }
+
+      .player-buttons {
+        flex-shrink: 0;
+      }
+    }
+
     .player-selectors {
       display: flex;
       flex-direction: column;
@@ -401,6 +426,17 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
+    }
+
+    /* On larger screens, version selector can be more compact */
+    @media (min-width: 900px) {
+      .selector-group {
+        gap: 4px;
+      }
+
+      .selector-label {
+        font-size: 9px;
+      }
     }
 
     .selector-label {
@@ -460,6 +496,7 @@
       display: flex;
       gap: 8px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .player-btn {
@@ -539,6 +576,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      width: 100%;
     }
 
     .scrub-bar-container {
@@ -762,6 +800,138 @@
       gap: 12px;
       transition: all 0.3s ease;
       border-radius: var(--radius-md);
+      position: relative;
+    }
+
+    .nav-toggle-btn {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      border-radius: 5px;
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text-soft);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      transition: all 0.15s ease;
+      padding: 0;
+      z-index: 1;
+      line-height: 1;
+    }
+
+    .nav-toggle-btn:hover {
+      border-color: rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+    }
+
+    .nav-toggle-btn.active {
+      border-color: var(--accent);
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--accent);
+    }
+
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 16px;
+      width: 280px;
+      max-height: 0;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), #020617);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: var(--shadow-soft);
+      transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+      opacity: 0;
+      padding: 0;
+      z-index: 101;
+    }
+
+    .nav-dropdown.open {
+      max-height: 500px;
+      opacity: 1;
+      padding: 16px 16px 14px;
+    }
+
+    .nav-dropdown h2 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 10px;
+      color: var(--text-soft);
+    }
+
+    .nav-dropdown .timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .nav-dropdown .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 7px 9px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.12s ease, border-color 0.12s ease, transform 0.12s ease;
+    }
+
+    .nav-dropdown .timeline-item:hover {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(148, 163, 184, 0.6);
+      transform: translateY(-1px);
+    }
+
+    .nav-dropdown .timeline-item.active {
+      background: radial-gradient(circle at top left, var(--accent-soft), #020617);
+      border-color: var(--accent);
+    }
+
+    .nav-dropdown .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 2px solid rgba(148, 163, 184, 0.7);
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .nav-dropdown .timeline-item.active .timeline-dot {
+      border-color: var(--accent2);
+      box-shadow: 0 0 18px rgba(34, 197, 94, 0.9);
+    }
+
+    .nav-dropdown .timeline-text {
+      font-size: 12px;
+    }
+
+    .nav-dropdown .timeline-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .nav-dropdown .timeline-tag {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .nav-dropdown .tiny-caption {
+      font-size: 11px;
+      color: var(--text-soft);
+      opacity: 0.8;
+      border-top: 1px solid rgba(148, 163, 184, 0.25);
+      padding-top: 8px;
+      margin-top: 6px;
     }
 
     .state-transition-item {
@@ -1085,22 +1255,59 @@
           <div class="chip">Spoken Story + Track Players</div>
           <div class="chip">EchoVerse · Responce Suite</div>
         </div>
-
-        <div class="primary-actions">
-          <button class="btn-primary" id="playAll">
-            <span class="icon">▶</span>
-            <span>Play EchoStory Flow</span>
-          </button>
-          <button class="btn-ghost" id="scrollToLyrics">
-            <span class="icon">♫</span>
-            <span>All Lyrics</span>
-          </button>
-        </div>
       </div>
     </header>
 
     <!-- State Transition Bar -->
     <div class="state-transition-bar" id="stateTransitionBar">
+      <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle navigation">
+        <span>☰</span>
+      </button>
+      <div class="nav-dropdown" id="navDropdown">
+        <h2>Story Navigation</h2>
+        <div class="timeline-list">
+          <div class="timeline-item active" data-target="chamber-1">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">
+              <div class="timeline-title">Chamber I · Chaos</div>
+              <div class="timeline-tag">
+                Naming the storm · No more weaponizing feelings
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item" data-target="chamber-2">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">
+              <div class="timeline-title">Chamber II · Safety</div>
+              <div class="timeline-tag">
+                Nervous system stands down · Voice loses its fangs
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item" data-target="chamber-3">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">
+              <div class="timeline-title">Chamber III · Build</div>
+              <div class="timeline-tag">
+                We don't flinch · We architect the future
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item" data-target="chamber-4">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">
+              <div class="timeline-title">Chamber IV · Integration</div>
+              <div class="timeline-tag">
+                Love as competence · The new normal
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="tiny-caption">
+          Click any chamber to jump, or use "Play EchoStory Flow" to hear the
+          full narrative arc with all four tracks back-to-back.
+        </p>
+      </div>
       <div class="state-transition-item chaos active" data-chamber="chamber-1">
         <span>🟥</span> Chaos
       </div>
@@ -1135,6 +1342,16 @@
               <li>Chamber III · We Don't Flinch We Build</li>
               <li>Chamber IV · After We Learned to Hear Each Other</li>
             </ul>
+            <div class="primary-actions" style="margin-top: 12px;">
+              <button class="btn-primary" id="playAll">
+                <span class="icon">▶</span>
+                <span>Play EchoStory Flow</span>
+              </button>
+              <button class="btn-ghost" id="scrollToLyrics">
+                <span class="icon">♫</span>
+                <span>All Lyrics</span>
+              </button>
+            </div>
           </div>
           <div>
             <audio id="audioChaosV1" src="my-chaos-aint-your-crisis.mp3" preload="metadata"></audio>
@@ -1145,10 +1362,6 @@
             <audio id="audioBuildV2" src="we-dont-flinch-we-build-alt.mp3" preload="metadata"></audio>
             <audio id="audioIntegrationV1" src="after-we-learned-to-hear-each-other.mp3" preload="metadata"></audio>
             <audio id="audioIntegrationV2" src="after-we-learned-to-hear-each-other-alt.mp3" preload="metadata"></audio>
-            <p class="footer-note">
-              Tip: keep this page in the same folder as your .mp3 files, or
-              adjust the <code>src</code> paths to match your setup.
-            </p>
           </div>
         </div>
 
@@ -1192,51 +1405,53 @@
                   </div>
                   <div class="time-display" data-player="chaos" data-type="total">0:00</div>
                 </div>
-                <div class="visualizer" data-player="chaos">
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                </div>
               </div>
-              <div class="player-selectors">
-                <div class="selector-group">
-                  <div class="selector-label">Version</div>
-                  <div class="selector-buttons" data-player="chaos" data-type="version">
-                    <button class="selector-btn version-btn active" data-version="1">Version 1</button>
-                    <button class="selector-btn version-btn" data-version="2">Version 2</button>
+              <div class="visualizer" data-player="chaos">
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+              </div>
+              <div class="player-controls-bottom-row">
+                <div class="player-selectors">
+                  <div class="selector-group">
+                    <div class="selector-label">Version</div>
+                    <div class="selector-buttons" data-player="chaos" data-type="version">
+                      <button class="selector-btn version-btn active" data-version="1">Version 1</button>
+                      <button class="selector-btn version-btn" data-version="2">Version 2</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="player-buttons">
-                <button class="player-btn play" data-player="chaos" data-action="play">
-                  <span>▶</span> Play
-                </button>
-                <button class="player-btn pause" data-player="chaos" data-action="pause" style="display: none;">
-                  <span>⏸</span> Pause
-                </button>
-                <button class="player-btn stop" data-player="chaos" data-action="stop">
-                  <span>⏹</span> Stop
-                </button>
-                <button class="selector-btn" data-player="chaos" data-action="favorite" title="Mark as favorite">
-                  <span>★</span> Favorite
-                </button>
+                <div class="player-buttons">
+                  <button class="player-btn play" data-player="chaos" data-action="play">
+                    <span>▶</span> Play
+                  </button>
+                  <button class="player-btn pause" data-player="chaos" data-action="pause" style="display: none;">
+                    <span>⏸</span> Pause
+                  </button>
+                  <button class="player-btn stop" data-player="chaos" data-action="stop">
+                    <span>⏹</span> Stop
+                  </button>
+                  <button class="selector-btn" data-player="chaos" data-action="favorite" title="Mark as favorite">
+                    <span>★</span> Favorite
+                  </button>
+                </div>
               </div>
               <div class="player-status" data-player="chaos">Ready to play</div>
               <audio id="audioChaosLocal" preload="metadata" style="display: none;"></audio>
@@ -1450,51 +1665,53 @@ To stop turning all my triggers into who you have to be.
                   </div>
                   <div class="time-display" data-player="danger" data-type="total">0:00</div>
                 </div>
-                <div class="visualizer" data-player="danger">
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                </div>
               </div>
-              <div class="player-selectors">
-                <div class="selector-group">
-                  <div class="selector-label">Version</div>
-                  <div class="selector-buttons" data-player="danger" data-type="version">
-                    <button class="selector-btn version-btn active" data-version="1">Version 1</button>
-                    <button class="selector-btn version-btn" data-version="2">Version 2</button>
+              <div class="visualizer" data-player="danger">
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+              </div>
+              <div class="player-controls-bottom-row">
+                <div class="player-selectors">
+                  <div class="selector-group">
+                    <div class="selector-label">Version</div>
+                    <div class="selector-buttons" data-player="danger" data-type="version">
+                      <button class="selector-btn version-btn active" data-version="1">Version 1</button>
+                      <button class="selector-btn version-btn" data-version="2">Version 2</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="player-buttons">
-                <button class="player-btn play" data-player="danger" data-action="play">
-                  <span>▶</span> Play
-                </button>
-                <button class="player-btn pause" data-player="danger" data-action="pause" style="display: none;">
-                  <span>⏸</span> Pause
-                </button>
-                <button class="player-btn stop" data-player="danger" data-action="stop">
-                  <span>⏹</span> Stop
-                </button>
-                <button class="selector-btn" data-player="danger" data-action="favorite" title="Mark as favorite">
-                  <span>★</span> Favorite
-                </button>
+                <div class="player-buttons">
+                  <button class="player-btn play" data-player="danger" data-action="play">
+                    <span>▶</span> Play
+                  </button>
+                  <button class="player-btn pause" data-player="danger" data-action="pause" style="display: none;">
+                    <span>⏸</span> Pause
+                  </button>
+                  <button class="player-btn stop" data-player="danger" data-action="stop">
+                    <span>⏹</span> Stop
+                  </button>
+                  <button class="selector-btn" data-player="danger" data-action="favorite" title="Mark as favorite">
+                    <span>★</span> Favorite
+                  </button>
+                </div>
               </div>
               <div class="player-status" data-player="danger">Ready to play</div>
               <audio id="audioDangerLocal" preload="metadata" style="display: none;"></audio>
@@ -1704,51 +1921,53 @@ Turns out safety isn’t silence — it’s the space where love can burst.
                   </div>
                   <div class="time-display" data-player="build" data-type="total">0:00</div>
                 </div>
-                <div class="visualizer" data-player="build">
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                </div>
               </div>
-              <div class="player-selectors">
-                <div class="selector-group">
-                  <div class="selector-label">Version</div>
-                  <div class="selector-buttons" data-player="build" data-type="version">
-                    <button class="selector-btn version-btn active" data-version="1">Version 1</button>
-                    <button class="selector-btn version-btn" data-version="2">Version 2</button>
+              <div class="visualizer" data-player="build">
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+              </div>
+              <div class="player-controls-bottom-row">
+                <div class="player-selectors">
+                  <div class="selector-group">
+                    <div class="selector-label">Version</div>
+                    <div class="selector-buttons" data-player="build" data-type="version">
+                      <button class="selector-btn version-btn active" data-version="1">Version 1</button>
+                      <button class="selector-btn version-btn" data-version="2">Version 2</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="player-buttons">
-                <button class="player-btn play" data-player="build" data-action="play">
-                  <span>▶</span> Play
-                </button>
-                <button class="player-btn pause" data-player="build" data-action="pause" style="display: none;">
-                  <span>⏸</span> Pause
-                </button>
-                <button class="player-btn stop" data-player="build" data-action="stop">
-                  <span>⏹</span> Stop
-                </button>
-                <button class="selector-btn" data-player="build" data-action="favorite" title="Mark as favorite">
-                  <span>★</span> Favorite
-                </button>
+                <div class="player-buttons">
+                  <button class="player-btn play" data-player="build" data-action="play">
+                    <span>▶</span> Play
+                  </button>
+                  <button class="player-btn pause" data-player="build" data-action="pause" style="display: none;">
+                    <span>⏸</span> Pause
+                  </button>
+                  <button class="player-btn stop" data-player="build" data-action="stop">
+                    <span>⏹</span> Stop
+                  </button>
+                  <button class="selector-btn" data-player="build" data-action="favorite" title="Mark as favorite">
+                    <span>★</span> Favorite
+                  </button>
+                </div>
               </div>
               <div class="player-status" data-player="build">Ready to play</div>
               <audio id="audioBuildLocal" preload="metadata" style="display: none;"></audio>
@@ -1965,51 +2184,53 @@ It’s the blueprint for progression.
                   </div>
                   <div class="time-display" data-player="integration" data-type="total">0:00</div>
                 </div>
-                <div class="visualizer" data-player="integration">
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                  <div class="visualizer-bar"></div>
-                </div>
               </div>
-              <div class="player-selectors">
-                <div class="selector-group">
-                  <div class="selector-label">Version</div>
-                  <div class="selector-buttons" data-player="integration" data-type="version">
-                    <button class="selector-btn version-btn active" data-version="1">Version 1</button>
-                    <button class="selector-btn version-btn" data-version="2">Version 2</button>
+              <div class="visualizer" data-player="integration">
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+              </div>
+              <div class="player-controls-bottom-row">
+                <div class="player-selectors">
+                  <div class="selector-group">
+                    <div class="selector-label">Version</div>
+                    <div class="selector-buttons" data-player="integration" data-type="version">
+                      <button class="selector-btn version-btn active" data-version="1">Version 1</button>
+                      <button class="selector-btn version-btn" data-version="2">Version 2</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="player-buttons">
-                <button class="player-btn play" data-player="integration" data-action="play">
-                  <span>▶</span> Play
-                </button>
-                <button class="player-btn pause" data-player="integration" data-action="pause" style="display: none;">
-                  <span>⏸</span> Pause
-                </button>
-                <button class="player-btn stop" data-player="integration" data-action="stop">
-                  <span>⏹</span> Stop
-                </button>
-                <button class="selector-btn" data-player="integration" data-action="favorite" title="Mark as favorite">
-                  <span>★</span> Favorite
-                </button>
+                <div class="player-buttons">
+                  <button class="player-btn play" data-player="integration" data-action="play">
+                    <span>▶</span> Play
+                  </button>
+                  <button class="player-btn pause" data-player="integration" data-action="pause" style="display: none;">
+                    <span>⏸</span> Pause
+                  </button>
+                  <button class="player-btn stop" data-player="integration" data-action="stop">
+                    <span>⏹</span> Stop
+                  </button>
+                  <button class="selector-btn" data-player="integration" data-action="favorite" title="Mark as favorite">
+                    <span>★</span> Favorite
+                  </button>
+                </div>
               </div>
               <div class="player-status" data-player="integration">Ready to play</div>
               <audio id="audioIntegrationLocal" preload="metadata" style="display: none;"></audio>
@@ -2164,54 +2385,22 @@ It's just two aligned voices.
         </div>
       </div>
 
-      <!-- Right: Timeline / Navigation -->
-      <aside class="timeline">
-        <h2>Story Navigation</h2>
-        <div class="timeline-list">
-          <div class="timeline-item active" data-target="chamber-1">
-            <div class="timeline-dot"></div>
-            <div class="timeline-text">
-              <div class="timeline-title">Chamber I · Chaos</div>
-              <div class="timeline-tag">
-                Naming the storm · No more weaponizing feelings
-              </div>
-            </div>
-          </div>
-          <div class="timeline-item" data-target="chamber-2">
-            <div class="timeline-dot"></div>
-            <div class="timeline-text">
-              <div class="timeline-title">Chamber II · Safety</div>
-              <div class="timeline-tag">
-                Nervous system stands down · Voice loses its fangs
-              </div>
-            </div>
-          </div>
-          <div class="timeline-item" data-target="chamber-3">
-            <div class="timeline-dot"></div>
-            <div class="timeline-text">
-              <div class="timeline-title">Chamber III · Build</div>
-              <div class="timeline-tag">
-                We don't flinch · We architect the future
-              </div>
-            </div>
-          </div>
-          <div class="timeline-item" data-target="chamber-4">
-            <div class="timeline-dot"></div>
-            <div class="timeline-text">
-              <div class="timeline-title">Chamber IV · Integration</div>
-              <div class="timeline-tag">
-                Love as competence · The new normal
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <p class="tiny-caption">
-          Click any chamber to jump, or use "Play EchoStory Flow" to hear the
-          full narrative arc with all four tracks back-to-back.
-        </p>
-      </aside>
     </main>
+
+    <footer class="revolution-footer">
+      <div class="revolution-footer-inner">
+        <p class="revolution-footer-line">
+          This has been an <span class="accent">EchoStory</span>  
+          brought to you by <span class="accent">EchoVerse</span> · <span class="accent">AeroVista</span>
+        </p>
+        <p class="revolution-footer-link">
+          Explore more EchoStories at
+          <a href="https://aerovista-us.github.io/echostory/" target="_blank" rel="noopener">
+            aerovista-us.github.io/echostory
+          </a>
+        </p>
+      </div>
+    </footer>
   </div>
 
   <script>
@@ -2621,20 +2810,8 @@ It's just two aligned voices.
       initPlayer(playerId);
     });
 
-    // --- Navigation / Timeline ---
-    const timelineItems = document.querySelectorAll(".timeline-item");
-
-    timelineItems.forEach(item => {
-      item.addEventListener("click", () => {
-        const targetId = item.getAttribute("data-target");
-        const section = document.getElementById(targetId);
-        if (section) {
-          section.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-        timelineItems.forEach(i => i.classList.remove("active"));
-        item.classList.add("active");
-      });
-    });
+    // --- Navigation / Timeline (dropdown only) ---
+    // Timeline items are now only in the dropdown
 
     // Update active state on scroll (simple intersection)
     const sections = [
@@ -2659,8 +2836,9 @@ It's just two aligned voices.
         if (mostVisible) {
           const id = mostVisible.target.id;
           
-          // Update timeline
-          timelineItems.forEach(i => {
+          // Update dropdown timeline
+          const dropdownTimelineItems = document.querySelectorAll('#navDropdown .timeline-item');
+          dropdownTimelineItems.forEach(i => {
             if (i.getAttribute("data-target") === id) {
               i.classList.add("active");
             } else {
@@ -2693,21 +2871,47 @@ It's just two aligned voices.
         el.open = true;
       }
     });
-  </script>
 
-  <footer class="revolution-footer">
-    <div class="revolution-footer-inner">
-      <p class="revolution-footer-line">
-        This has been an <span class="accent">EchoStory</span>  
-        brought to you by <span class="accent">EchoVerse</span> · <span class="accent">AeroVista</span>
-      </p>
-      <p class="revolution-footer-link">
-        Explore more EchoStories at
-        <a href="https://aerovista-us.github.io/echostory/" target="_blank" rel="noopener">
-          aerovista-us.github.io/echostory
-        </a>
-      </p>
-    </div>
-  </footer>
+    // Navigation Dropdown Toggle
+    const navToggleBtn = document.getElementById("navToggleBtn");
+    const navDropdown = document.getElementById("navDropdown");
+    const dropdownTimelineItems = navDropdown.querySelectorAll(".timeline-item");
+
+    navToggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      navDropdown.classList.toggle("open");
+      navToggleBtn.classList.toggle("active");
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!navDropdown.contains(e.target) && !navToggleBtn.contains(e.target)) {
+        navDropdown.classList.remove("open");
+        navToggleBtn.classList.remove("active");
+      }
+    });
+
+    // Handle dropdown timeline item clicks
+    dropdownTimelineItems.forEach(item => {
+      item.addEventListener("click", () => {
+        const targetId = item.getAttribute("data-target");
+        const section = document.getElementById(targetId);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        // Update active states in dropdown
+        dropdownTimelineItems.forEach(i => {
+          if (i.getAttribute("data-target") === targetId) {
+            i.classList.add("active");
+          } else {
+            i.classList.remove("active");
+          }
+        });
+        // Close dropdown after selection
+        navDropdown.classList.remove("open");
+        navToggleBtn.classList.remove("active");
+      });
+    });
+  </script>
 </body>
 </html>
