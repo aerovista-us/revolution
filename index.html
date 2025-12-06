@@ -384,6 +384,241 @@
       height: 32px;
     }
 
+    .player-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .player-selectors {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .selector-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .selector-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+
+    .selector-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .selector-btn {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text-main);
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .selector-btn:hover {
+      border-color: rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.95);
+      transform: translateY(-1px);
+    }
+
+    .selector-btn.active {
+      border-color: var(--accent);
+      background: radial-gradient(circle at top left, var(--accent-soft), rgba(15, 23, 42, 0.9));
+      color: #e9d5ff;
+      box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+    }
+
+    .version-btn {
+      position: relative;
+    }
+
+    .version-btn.favorite::after {
+      content: "★";
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      font-size: 10px;
+      color: var(--accent2);
+      text-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
+    }
+
+    .player-buttons {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .player-btn {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.7));
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 80px;
+      justify-content: center;
+    }
+
+    .player-btn:hover {
+      border-color: rgba(148, 163, 184, 0.8);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.9));
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .player-btn:active {
+      transform: translateY(0);
+    }
+
+    .player-btn.play {
+      background: radial-gradient(circle at top left, var(--accent), #4f46e5);
+      border-color: var(--accent);
+      color: #f9fafb;
+      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.5);
+    }
+
+    .player-btn.play:hover {
+      box-shadow: 0 12px 28px rgba(139, 92, 246, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .player-btn.pause {
+      background: linear-gradient(135deg, var(--accent3), #ea580c);
+      border-color: var(--accent3);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+    }
+
+    .player-btn.pause:hover {
+      box-shadow: 0 12px 28px rgba(249, 115, 22, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .player-btn.stop {
+      background: linear-gradient(135deg, rgba(148, 163, 184, 0.3), rgba(148, 163, 184, 0.15));
+      border-color: rgba(148, 163, 184, 0.6);
+    }
+
+    .player-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .player-status {
+      font-size: 10px;
+      color: var(--text-soft);
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    .player-progress-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .scrub-bar-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .time-display {
+      font-size: 10px;
+      color: var(--text-soft);
+      font-variant-numeric: tabular-nums;
+      min-width: 45px;
+      text-align: right;
+    }
+
+    .scrub-bar-wrapper {
+      flex: 1;
+      position: relative;
+      height: 6px;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .scrub-bar-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 999px;
+      width: 0%;
+      transition: width 0.1s linear;
+      position: relative;
+    }
+
+    .scrub-bar-progress::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(139, 92, 246, 0.6);
+      border: 2px solid #fff;
+    }
+
+    .scrub-bar-wrapper:hover .scrub-bar-progress::after {
+      box-shadow: 0 0 12px rgba(139, 92, 246, 0.9);
+    }
+
+    .visualizer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 3px;
+      height: 40px;
+      padding: 4px 0;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 6px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .visualizer-bar {
+      width: 4px;
+      min-height: 2px;
+      background: linear-gradient(to top, var(--accent), var(--accent2));
+      border-radius: 2px;
+      transition: height 0.1s ease;
+      opacity: 0.6;
+    }
+
+    .visualizer-bar.active {
+      opacity: 1;
+      box-shadow: 0 0 4px rgba(139, 92, 246, 0.5);
+    }
+
     .script-block {
       margin-top: 8px;
       padding: 10px 10px 9px;
@@ -570,9 +805,12 @@
             </ul>
           </div>
           <div>
-            <audio id="audioChaos" src="My Chaos Ain’t Your Crisis.mp3" preload="metadata"></audio>
-            <audio id="audioDanger" src="I Don’t Hear Danger In Your Voice.mp3" preload="metadata"></audio>
-            <audio id="audioBuild" src="We Don’t Flinch We Build.mp3" preload="metadata"></audio>
+            <audio id="audioChaosV1" src="My Chaos Ain't Your Crisis.mp3" preload="metadata"></audio>
+            <audio id="audioChaosV2" src="My Chaos Ain't Your Crisis.alt.mp3" preload="metadata"></audio>
+            <audio id="audioDangerV1" src="I Don't Hear Danger In Your Voice.mp3" preload="metadata"></audio>
+            <audio id="audioDangerV2" src="I Don't Hear Danger In Your Voice.alt.mp3" preload="metadata"></audio>
+            <audio id="audioBuildV1" src="We Don't Flinch We Build.mp3" preload="metadata"></audio>
+            <audio id="audioBuildV2" src="We Don't Flinch We Build.alt.mp3" preload="metadata"></audio>
             <p class="footer-note">
               Tip: keep this page in the same folder as your .mp3 files, or
               adjust the <code>src</code> paths to match your setup.
@@ -601,7 +839,7 @@
             <div>
               <div class="player-meta-title">Track Player · Origin Storm</div>
               <div class="player-meta-sub">
-                “My Chaos Ain’t Your Crisis” — the moment the narrator stops
+                "My Chaos Ain't Your Crisis" — the moment the narrator stops
                 outsourcing their explosions.
               </div>
               <div class="pill-row">
@@ -610,12 +848,63 @@
                 <div class="pill">Confessional Flow</div>
               </div>
             </div>
-            <div>
-              <audio
-                controls
-                id="audioChaosLocal"
-                src="My Chaos Ain’t Your Crisis.mp3"
-              ></audio>
+            <div class="player-controls">
+              <div class="player-progress-section">
+                <div class="scrub-bar-container">
+                  <div class="time-display" data-player="chaos" data-type="current">0:00</div>
+                  <div class="scrub-bar-wrapper" data-player="chaos">
+                    <div class="scrub-bar-progress" data-player="chaos"></div>
+                  </div>
+                  <div class="time-display" data-player="chaos" data-type="total">0:00</div>
+                </div>
+                <div class="visualizer" data-player="chaos">
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                </div>
+              </div>
+              <div class="player-selectors">
+                <div class="selector-group">
+                  <div class="selector-label">Version</div>
+                  <div class="selector-buttons" data-player="chaos" data-type="version">
+                    <button class="selector-btn version-btn active" data-version="1">Version 1</button>
+                    <button class="selector-btn version-btn" data-version="2">Version 2</button>
+                  </div>
+                </div>
+              </div>
+              <div class="player-buttons">
+                <button class="player-btn play" data-player="chaos" data-action="play">
+                  <span>▶</span> Play
+                </button>
+                <button class="player-btn pause" data-player="chaos" data-action="pause" style="display: none;">
+                  <span>⏸</span> Pause
+                </button>
+                <button class="player-btn stop" data-player="chaos" data-action="stop">
+                  <span>⏹</span> Stop
+                </button>
+                <button class="selector-btn" data-player="chaos" data-action="favorite" title="Mark as favorite">
+                  <span>★</span> Favorite
+                </button>
+              </div>
+              <div class="player-status" data-player="chaos">Ready to play</div>
+              <audio id="audioChaosLocal" preload="metadata" style="display: none;"></audio>
             </div>
           </div>
 
@@ -787,8 +1076,8 @@ To stop turning all my triggers into who you have to be.
             <div>
               <div class="player-meta-title">Track Player · Quiet Proof</div>
               <div class="player-meta-sub">
-                “I Don’t Hear Danger In Your Voice” — the first time calm
-                doesn’t feel like a trap.
+                "I Don't Hear Danger In Your Voice" — the first time calm
+                doesn't feel like a trap.
               </div>
               <div class="pill-row">
                 <div class="pill">Soft 808</div>
@@ -796,12 +1085,63 @@ To stop turning all my triggers into who you have to be.
                 <div class="pill">Gentle Vocal Stack</div>
               </div>
             </div>
-            <div>
-              <audio
-                controls
-                id="audioDangerLocal"
-                src="I Don’t Hear Danger In Your Voice.mp3"
-              ></audio>
+            <div class="player-controls">
+              <div class="player-progress-section">
+                <div class="scrub-bar-container">
+                  <div class="time-display" data-player="danger" data-type="current">0:00</div>
+                  <div class="scrub-bar-wrapper" data-player="danger">
+                    <div class="scrub-bar-progress" data-player="danger"></div>
+                  </div>
+                  <div class="time-display" data-player="danger" data-type="total">0:00</div>
+                </div>
+                <div class="visualizer" data-player="danger">
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                </div>
+              </div>
+              <div class="player-selectors">
+                <div class="selector-group">
+                  <div class="selector-label">Version</div>
+                  <div class="selector-buttons" data-player="danger" data-type="version">
+                    <button class="selector-btn version-btn active" data-version="1">Version 1</button>
+                    <button class="selector-btn version-btn" data-version="2">Version 2</button>
+                  </div>
+                </div>
+              </div>
+              <div class="player-buttons">
+                <button class="player-btn play" data-player="danger" data-action="play">
+                  <span>▶</span> Play
+                </button>
+                <button class="player-btn pause" data-player="danger" data-action="pause" style="display: none;">
+                  <span>⏸</span> Pause
+                </button>
+                <button class="player-btn stop" data-player="danger" data-action="stop">
+                  <span>⏹</span> Stop
+                </button>
+                <button class="selector-btn" data-player="danger" data-action="favorite" title="Mark as favorite">
+                  <span>★</span> Favorite
+                </button>
+              </div>
+              <div class="player-status" data-player="danger">Ready to play</div>
+              <audio id="audioDangerLocal" preload="metadata" style="display: none;"></audio>
             </div>
           </div>
 
@@ -969,8 +1309,8 @@ Turns out safety isn’t silence — it’s the space where love can burst.
             <div>
               <div class="player-meta-title">Track Player · Builder Mode</div>
               <div class="player-meta-sub">
-                “We Don’t Flinch We Build” — the moment the story stops asking
-                “Will we last?” and starts asking “What are we making?”
+                "We Don't Flinch We Build" — the moment the story stops asking
+                "Will we last?" and starts asking "What are we making?"
               </div>
               <div class="pill-row">
                 <div class="pill">Bold Drums</div>
@@ -978,12 +1318,63 @@ Turns out safety isn’t silence — it’s the space where love can burst.
                 <div class="pill">Chant Hooks</div>
               </div>
             </div>
-            <div>
-              <audio
-                controls
-                id="audioBuildLocal"
-                src="We Don’t Flinch We Build.mp3"
-              ></audio>
+            <div class="player-controls">
+              <div class="player-progress-section">
+                <div class="scrub-bar-container">
+                  <div class="time-display" data-player="build" data-type="current">0:00</div>
+                  <div class="scrub-bar-wrapper" data-player="build">
+                    <div class="scrub-bar-progress" data-player="build"></div>
+                  </div>
+                  <div class="time-display" data-player="build" data-type="total">0:00</div>
+                </div>
+                <div class="visualizer" data-player="build">
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                </div>
+              </div>
+              <div class="player-selectors">
+                <div class="selector-group">
+                  <div class="selector-label">Version</div>
+                  <div class="selector-buttons" data-player="build" data-type="version">
+                    <button class="selector-btn version-btn active" data-version="1">Version 1</button>
+                    <button class="selector-btn version-btn" data-version="2">Version 2</button>
+                  </div>
+                </div>
+              </div>
+              <div class="player-buttons">
+                <button class="player-btn play" data-player="build" data-action="play">
+                  <span>▶</span> Play
+                </button>
+                <button class="player-btn pause" data-player="build" data-action="pause" style="display: none;">
+                  <span>⏸</span> Pause
+                </button>
+                <button class="player-btn stop" data-player="build" data-action="stop">
+                  <span>⏹</span> Stop
+                </button>
+                <button class="selector-btn" data-player="build" data-action="favorite" title="Mark as favorite">
+                  <span>★</span> Favorite
+                </button>
+              </div>
+              <div class="player-status" data-player="build">Ready to play</div>
+              <audio id="audioBuildLocal" preload="metadata" style="display: none;"></audio>
             </div>
           </div>
 
@@ -1182,9 +1573,9 @@ It’s the blueprint for progression.
 
   <script>
     // --- Audio Flow Logic ---
-    const audioChaos = document.getElementById("audioChaos");
-    const audioDanger = document.getElementById("audioDanger");
-    const audioBuild = document.getElementById("audioBuild");
+    const audioChaos = document.getElementById("audioChaosV1");
+    const audioDanger = document.getElementById("audioDangerV1");
+    const audioBuild = document.getElementById("audioBuildV1");
 
     const sequence = [audioChaos, audioDanger, audioBuild];
 
@@ -1222,34 +1613,360 @@ It’s the blueprint for progression.
       playSequenceFrom(0);
     });
 
-    // Link local players to main sequence so they don't double-play
-    const audioChaosLocal = document.getElementById("audioChaosLocal");
-    const audioDangerLocal = document.getElementById("audioDangerLocal");
-    const audioBuildLocal = document.getElementById("audioBuildLocal");
+    // Enhanced Player System
+    const players = {
+      chaos: {
+        audio: document.getElementById("audioChaosLocal"), // Local player element
+        v1: document.getElementById("audioChaosV1"),      // Preloaded version 1
+        v2: document.getElementById("audioChaosV2"),      // Preloaded version 2
+        master: audioChaos,                                 // For sequence playback
+        name: "Origin Storm"
+      },
+      danger: {
+        audio: document.getElementById("audioDangerLocal"),
+        v1: document.getElementById("audioDangerV1"),
+        v2: document.getElementById("audioDangerV2"),
+        master: audioDanger,
+        name: "Quiet Proof"
+      },
+      build: {
+        audio: document.getElementById("audioBuildLocal"),
+        v1: document.getElementById("audioBuildV1"),
+        v2: document.getElementById("audioBuildV2"),
+        master: audioBuild,
+        name: "Builder Mode"
+      }
+    };
 
-    function wireLocalToMaster(localEl, masterEl) {
-      if (!localEl || !masterEl) return;
-      localEl.addEventListener("play", () => {
-        // Pause masters & other locals to avoid double audio
-        [audioChaos, audioDanger, audioBuild].forEach(a => {
-          if (a !== masterEl) {
-            a.pause();
+    // Local storage keys
+    const STORAGE_PREFIX = "echostory_player_";
+
+    // Initialize player state
+    function initPlayer(playerId) {
+      const player = players[playerId];
+      if (!player) return;
+
+      // Load saved favorite from localStorage
+      const savedFavorite = localStorage.getItem(`${STORAGE_PREFIX}${playerId}_favorite`);
+      if (savedFavorite) {
+        try {
+          const favorite = JSON.parse(savedFavorite);
+          // Set active version if favorite exists
+          const versionBtn = document.querySelector(`[data-player="${playerId}"][data-type="version"] [data-version="${favorite.version}"]`);
+          if (versionBtn) {
+            // Remove active from all versions
+            document.querySelectorAll(`[data-player="${playerId}"][data-type="version"] .selector-btn`).forEach(btn => btn.classList.remove("active", "favorite"));
+            // Set active and favorite
+            versionBtn.classList.add("active", "favorite");
+            // Link to preloaded audio element
+            const audioElement = getAudioElement(playerId, favorite.version);
+            if (audioElement) {
+              // Link the local player to the preloaded element
+              linkToPreloadedAudio(player.audio, audioElement);
+            }
           }
-        });
-        [audioChaosLocal, audioDangerLocal, audioBuildLocal].forEach(a => {
-          if (a && a !== localEl) {
-            a.pause();
-          }
-        });
-        masterEl.currentTime = localEl.currentTime;
-        masterEl.play().catch(() => {});
-        localEl.pause(); // let master handle actual sound
+        } catch (e) {
+          console.error("Error loading favorite:", e);
+        }
+      } else {
+        // Default to version 1
+        const audioElement = getAudioElement(playerId, "1");
+        if (audioElement) {
+          linkToPreloadedAudio(player.audio, audioElement);
+        }
+      }
+
+      // Setup audio event listeners
+      setupAudioListeners(playerId);
+
+      // Update status
+      updatePlayerStatus(playerId, "Ready to play");
+    }
+
+    // Get audio element based on player and version
+    // Returns the preloaded audio element for the selected version
+    function getAudioElement(playerId, version) {
+      const player = players[playerId];
+      if (!player) return null;
+      
+      return version === "2" ? player.v2 : player.v1;
+    }
+
+    // Link local audio element to use preloaded audio element
+    function linkToPreloadedAudio(localAudio, preloadedAudio) {
+      // Copy src from preloaded to local so they reference the same file
+      localAudio.src = preloadedAudio.src;
+      localAudio.load();
+    }
+
+    // Setup audio event listeners for scrub bar, time display, and visualizer
+    function setupAudioListeners(playerId) {
+      const player = players[playerId];
+      if (!player) return;
+
+      // Update scrub bar and time display
+      player.audio.addEventListener('timeupdate', () => {
+        updateScrubBar(playerId, player.audio);
+        updateTimeDisplay(playerId, player.audio);
+      });
+
+      // Update total time when metadata loads
+      player.audio.addEventListener('loadedmetadata', () => {
+        updateTimeDisplay(playerId, player.audio);
+      });
+
+      // Start visualizer when playing
+      player.audio.addEventListener('play', () => {
+        startVisualizer(playerId);
+      });
+
+      // Stop visualizer when paused or stopped
+      player.audio.addEventListener('pause', () => {
+        stopVisualizer(playerId);
+      });
+
+      player.audio.addEventListener('ended', () => {
+        stopVisualizer(playerId);
+        const playBtn = document.querySelector(`[data-player="${playerId}"][data-action="play"]`);
+        const pauseBtn = document.querySelector(`[data-player="${playerId}"][data-action="pause"]`);
+        if (playBtn) playBtn.style.display = 'inline-flex';
+        if (pauseBtn) pauseBtn.style.display = 'none';
+        updatePlayerStatus(playerId, "Finished");
       });
     }
 
-    wireLocalToMaster(audioChaosLocal, audioChaos);
-    wireLocalToMaster(audioDangerLocal, audioDanger);
-    wireLocalToMaster(audioBuildLocal, audioBuild);
+    // Update scrub bar progress
+    function updateScrubBar(playerId, audioElement) {
+      if (!audioElement || !audioElement.duration) return;
+
+      const progress = (audioElement.currentTime / audioElement.duration) * 100;
+      const progressBar = document.querySelector(`.scrub-bar-progress[data-player="${playerId}"]`);
+      if (progressBar) {
+        progressBar.style.width = `${progress}%`;
+      }
+    }
+
+    // Update time display
+    function updateTimeDisplay(playerId, audioElement) {
+      if (!audioElement) return;
+
+      const currentTime = formatTime(audioElement.currentTime || 0);
+      const totalTime = formatTime(audioElement.duration || 0);
+
+      const currentEl = document.querySelector(`.time-display[data-player="${playerId}"][data-type="current"]`);
+      const totalEl = document.querySelector(`.time-display[data-player="${playerId}"][data-type="total"]`);
+
+      if (currentEl) currentEl.textContent = currentTime;
+      if (totalEl) totalEl.textContent = totalTime;
+    }
+
+    // Format time as MM:SS
+    function formatTime(seconds) {
+      if (!isFinite(seconds)) return "0:00";
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Visualizer animation
+    let visualizerIntervals = {};
+
+    function startVisualizer(playerId) {
+      stopVisualizer(playerId); // Clear any existing interval
+
+      const visualizer = document.querySelector(`.visualizer[data-player="${playerId}"]`);
+      if (!visualizer) return;
+
+      const bars = visualizer.querySelectorAll('.visualizer-bar');
+      
+      visualizerIntervals[playerId] = setInterval(() => {
+        bars.forEach((bar, index) => {
+          // Random height between 20% and 100% of container
+          const height = 20 + Math.random() * 80;
+          bar.style.height = `${height}%`;
+          
+          // Add active class for glow effect
+          bar.classList.add('active');
+          setTimeout(() => bar.classList.remove('active'), 100);
+        });
+      }, 150);
+    }
+
+    function stopVisualizer(playerId) {
+      if (visualizerIntervals[playerId]) {
+        clearInterval(visualizerIntervals[playerId]);
+        delete visualizerIntervals[playerId];
+      }
+      
+      // Reset all bars to minimum height
+      const visualizer = document.querySelector(`.visualizer[data-player="${playerId}"]`);
+      if (visualizer) {
+        visualizer.querySelectorAll('.visualizer-bar').forEach(bar => {
+          bar.style.height = '2px';
+          bar.classList.remove('active');
+        });
+      }
+    }
+
+    // Handle scrub bar clicks
+    document.querySelectorAll('.scrub-bar-wrapper').forEach(wrapper => {
+      wrapper.addEventListener('click', (e) => {
+        const playerId = wrapper.dataset.player;
+        const player = players[playerId];
+        if (!player || !player.audio.duration) return;
+
+        const rect = wrapper.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const percentage = clickX / rect.width;
+        const newTime = percentage * player.audio.duration;
+
+        player.audio.currentTime = newTime;
+        updateScrubBar(playerId, player.audio);
+        updateTimeDisplay(playerId, player.audio);
+      });
+    });
+
+    // Update player status text
+    function updatePlayerStatus(playerId, text) {
+      const statusEl = document.querySelector(`.player-status[data-player="${playerId}"]`);
+      if (statusEl) {
+        statusEl.textContent = text;
+      }
+    }
+
+    // Handle version selection
+    document.querySelectorAll('[data-type="version"]').forEach(group => {
+      const playerId = group.dataset.player;
+      group.querySelectorAll('.selector-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Remove active from all versions in this group
+          group.querySelectorAll('.selector-btn').forEach(b => b.classList.remove('active'));
+          // Add active to clicked
+          btn.classList.add('active');
+          
+          // Update audio source
+          const version = btn.dataset.version;
+          const player = players[playerId];
+          if (player) {
+            const audioElement = getAudioElement(playerId, version);
+            if (audioElement) {
+              const wasPlaying = !player.audio.paused;
+              const currentTime = player.audio.currentTime;
+              
+              // Link to preloaded audio element
+              linkToPreloadedAudio(player.audio, audioElement);
+              
+              // If it was playing, resume playback
+              if (wasPlaying) {
+                player.audio.currentTime = currentTime;
+                player.audio.play().catch(() => {});
+              }
+            }
+            
+            updatePlayerStatus(playerId, `Version ${version} selected`);
+          }
+        });
+      });
+    });
+
+    // Handle play/pause/stop buttons
+    document.querySelectorAll('[data-action="play"], [data-action="pause"], [data-action="stop"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const playerId = btn.dataset.player;
+        const action = btn.dataset.action;
+        const player = players[playerId];
+        if (!player) return;
+
+        // Stop all other players
+        Object.keys(players).forEach(id => {
+          if (id !== playerId) {
+            const otherPlayer = players[id];
+            otherPlayer.audio.pause();
+            otherPlayer.audio.currentTime = 0;
+            const otherPlayBtn = document.querySelector(`[data-player="${id}"][data-action="play"]`);
+            const otherPauseBtn = document.querySelector(`[data-player="${id}"][data-action="pause"]`);
+            if (otherPlayBtn) otherPlayBtn.style.display = 'inline-flex';
+            if (otherPauseBtn) otherPauseBtn.style.display = 'none';
+            updatePlayerStatus(id, "Stopped");
+          }
+        });
+
+        // Stop master sequence players
+        [audioChaos, audioDanger, audioBuild].forEach(a => {
+          a.pause();
+          a.currentTime = 0;
+        });
+
+        if (action === 'play') {
+          const version = document.querySelector(`[data-player="${playerId}"][data-type="version"] .selector-btn.active`)?.dataset.version || "1";
+          
+          // Get the preloaded audio element for this version
+          const audioElement = getAudioElement(playerId, version);
+          if (audioElement) {
+            // Link local player to preloaded element (uses same src)
+            linkToPreloadedAudio(player.audio, audioElement);
+            
+            // Play the local audio element
+            player.audio.play().then(() => {
+              const playBtn = document.querySelector(`[data-player="${playerId}"][data-action="play"]`);
+              const pauseBtn = document.querySelector(`[data-player="${playerId}"][data-action="pause"]`);
+              if (playBtn) playBtn.style.display = 'none';
+              if (pauseBtn) pauseBtn.style.display = 'inline-flex';
+              updatePlayerStatus(playerId, `Playing: Version ${version}`);
+            }).catch(err => {
+              console.error("Play error:", err);
+              updatePlayerStatus(playerId, "Error: Could not play audio. Check file path.");
+            });
+          } else {
+            updatePlayerStatus(playerId, "Error: Audio element not found.");
+          }
+        } else if (action === 'pause') {
+          player.audio.pause();
+          const playBtn = document.querySelector(`[data-player="${playerId}"][data-action="play"]`);
+          const pauseBtn = document.querySelector(`[data-player="${playerId}"][data-action="pause"]`);
+          if (playBtn) playBtn.style.display = 'inline-flex';
+          if (pauseBtn) pauseBtn.style.display = 'none';
+          updatePlayerStatus(playerId, "Paused");
+        } else if (action === 'stop') {
+          player.audio.pause();
+          player.audio.currentTime = 0;
+          const playBtn = document.querySelector(`[data-player="${playerId}"][data-action="play"]`);
+          const pauseBtn = document.querySelector(`[data-player="${playerId}"][data-action="pause"]`);
+          if (playBtn) playBtn.style.display = 'inline-flex';
+          if (pauseBtn) pauseBtn.style.display = 'none';
+          updatePlayerStatus(playerId, "Stopped");
+        }
+      });
+    });
+
+    // Handle favorite button
+    document.querySelectorAll('[data-action="favorite"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const playerId = btn.dataset.player;
+        const version = document.querySelector(`[data-player="${playerId}"][data-type="version"] .selector-btn.active`)?.dataset.version || "1";
+        
+        // Save to localStorage
+        const favorite = { version };
+        localStorage.setItem(`${STORAGE_PREFIX}${playerId}_favorite`, JSON.stringify(favorite));
+        
+        // Update UI - remove favorite from all versions, add to current
+        const versionGroup = document.querySelector(`[data-player="${playerId}"][data-type="version"]`);
+        versionGroup.querySelectorAll('.version-btn').forEach(vBtn => {
+          vBtn.classList.remove('favorite');
+        });
+        const activeVersionBtn = versionGroup.querySelector(`[data-version="${version}"]`);
+        if (activeVersionBtn) {
+          activeVersionBtn.classList.add('favorite');
+        }
+        
+        updatePlayerStatus(playerId, `Favorite saved: Version ${version}`);
+      });
+    });
+
+    // Initialize all players
+    Object.keys(players).forEach(playerId => {
+      initPlayer(playerId);
+    });
 
     // --- Navigation / Timeline ---
     const timelineItems = document.querySelectorAll(".timeline-item");
