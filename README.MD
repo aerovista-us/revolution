@@ -37,15 +37,15 @@ The HTML player page stitches these tracks into a single narrative arc:
 
 Core audio:
 
-- `my-chaos-ain't-your-crisis.mp3`
-- `i-don't-hear-danger-in-your-voice.mp3`
-- `we-don't-flinch-we-build.mp3`
+- `my-chaos-aint-your-crisis.mp3`
+- `i-dont-hear-danger-in-your-voice.mp3`
+- `we-dont-flinch-we-build.mp3`
 
 Alt mixes (for future swaps / alternate cuts):
 
-- `my-chaos-ain't-your-crisis-alt.mp3`
-- `i-don't-hear-danger-in-your-voice-alt.mp3`
-- `we-don't-flinch-we-build-alt.mp3`
+- `my-chaos-aint-your-crisis-alt.mp3`
+- `i-dont-hear-danger-in-your-voice-alt.mp3`
+- `we-dont-flinch-we-build-alt.mp3`
 
 Text:
 
@@ -64,9 +64,9 @@ The EchoStory page is a **self-contained, dark-theme story console** that provid
 
 ### 1. Global "EchoStory Flow" Mode
 - A **3-step audio sequence**:
-  1. `my-chaos-ain't-your-crisis.mp3`
-  2. `i-don't-hear-danger-in-your-voice.mp3`
-  3. `we-don't-flinch-we-build.mp3`
+  1. `my-chaos-aint-your-crisis.mp3`
+  2. `i-dont-hear-danger-in-your-voice.mp3`
+  3. `we-dont-flinch-we-build.mp3`
 - Clicking **“Play EchoStory Flow”**:
   - Starts at Chamber I and automatically chains to II and III.
   - Scrolls the page to the current chamber as each track starts.
@@ -126,4 +126,4 @@ If you want the page to use the `.alt` versions:
 2. Find the `<audio>` tags and update `src` attributes, for example:
 
 ```html
-<audio id="audioChaosV2" src="my-chaos-ain't-your-crisis-alt.mp3" preload="metadata"></audio>
+<audio id="audioChaosV2" src="my-chaos-aint-your-crisis-alt.mp3" preload="metadata"></audio>

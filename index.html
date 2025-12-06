@@ -905,6 +905,120 @@
       position: relative;
       z-index: 1;
     }
+
+    .why-this-hits {
+      margin-top: 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: rgba(15, 23, 42, 0.6);
+      overflow: hidden;
+    }
+
+    .why-this-hits summary {
+      padding: 10px 12px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    .why-this-hits summary:hover {
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .why-this-hits summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .why-this-hits summary::after {
+      content: "⌄";
+      font-size: 14px;
+      opacity: 0.7;
+      transition: transform 0.2s ease;
+    }
+
+    .why-this-hits[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .why-this-hits-content {
+      padding: 12px 12px 14px;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--text-soft);
+    }
+
+    .gottman-link-section {
+      margin-top: 32px;
+      padding: 20px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(34, 197, 94, 0.05));
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      text-align: center;
+    }
+
+    .gottman-link-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .gottman-link-text {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    .gottman-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-main);
+      font-size: 11px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: all 0.15s ease;
+    }
+
+    .gottman-link-btn:hover {
+      border-color: var(--accent);
+      background: rgba(139, 92, 246, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .state-transition-item.integration {
+      background: rgba(139, 92, 246, 0.15);
+      border-color: rgba(139, 92, 246, 0.4);
+      color: #c4b5fd;
+    }
+
+    .state-transition-item.integration.active {
+      background: rgba(139, 92, 246, 0.25);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    }
+
+    .chamber-watermark.integration {
+      background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 20px, currentColor 20px, currentColor 21px),
+        repeating-linear-gradient(-45deg, transparent, transparent 20px, currentColor 20px, currentColor 21px);
+      background-size: 120px 120px;
+      color: #8b5cf6;
+    }
   </style>
 </head>
 <body>
@@ -960,6 +1074,10 @@
       <div class="state-transition-item build" data-chamber="chamber-3">
         <span>🟩</span> Build
       </div>
+      <span class="state-arrow">→</span>
+      <div class="state-transition-item integration" data-chamber="chamber-4">
+        <span>💜</span> Integration
+      </div>
     </div>
 
     <main>
@@ -970,13 +1088,14 @@
           <div>
             <div class="global-title">EchoStory Flow Mode</div>
             <div class="global-sub">
-              Plays all three chambers in sequence: Chaos → Safety → Build.
+              Plays all four chambers in sequence: Chaos → Safety → Build → Integration.
               Let it roll straight through, or drop into any chapter below.
             </div>
             <ul class="mini-steps">
-              <li>Chamber I · My Chaos Ain’t Your Crisis</li>
-              <li>Chamber II · I Don’t Hear Danger In Your Voice</li>
-              <li>Chamber III · We Don’t Flinch We Build</li>
+              <li>Chamber I · My Chaos Ain't Your Crisis</li>
+              <li>Chamber II · I Don't Hear Danger In Your Voice</li>
+              <li>Chamber III · We Don't Flinch We Build</li>
+              <li>Chamber IV · After We Learned to Hear Each Other</li>
             </ul>
           </div>
           <div>
@@ -986,6 +1105,8 @@
             <audio id="audioDangerV2" src="i-dont-hear-danger-in-your-voice-alt.mp3" preload="metadata"></audio>
             <audio id="audioBuildV1" src="we-dont-flinch-we-build.mp3" preload="metadata"></audio>
             <audio id="audioBuildV2" src="we-dont-flinch-we-build-alt.mp3" preload="metadata"></audio>
+            <audio id="audioIntegrationV1" src="after-we-learned-to-hear-each-other.mp3" preload="metadata"></audio>
+            <audio id="audioIntegrationV2" src="after-we-learned-to-hear-each-other-alt.mp3" preload="metadata"></audio>
             <p class="footer-note">
               Tip: keep this page in the same folder as your .mp3 files, or
               adjust the <code>src</code> paths to match your setup.
@@ -1133,9 +1254,18 @@
             </p>
           </div>
 
+          <details class="why-this-hits">
+            <summary>🔎 Why this track feels so uncomfortably true</summary>
+            <div class="why-this-hits-content">
+              When you hear this story, you're watching defensiveness slowly turn into control. This is what John & Julie Gottman describe as <strong>negative sentiment override</strong>: past hurts become the filter for everything your partner says, so even neutral questions land like attacks.<br><br>
+              In that state, "Did you call the bank?" doesn't arrive as information — it arrives as judgment. The nervous system reacts first, then the story gets written to justify the reaction. Over time, this makes the other person walk on eggshells, doing emotional labor just to avoid triggering an explosion.<br><br>
+              This track marks the moment someone realizes: my feelings are real, but that doesn't make my reactions fair. It's the shift from "you're causing this" to "I'm responsible for how I handle my own storm."
+            </div>
+          </details>
+
           <details class="lyrics">
             <summary>
-              <span>Show full lyrics · “My Chaos Ain’t Your Crisis”</span>
+              <span>Show full lyrics · "My Chaos Ain't Your Crisis"</span>
               <span class="chevron">⌄</span>
             </summary>
             <pre>
@@ -1380,9 +1510,18 @@ To stop turning all my triggers into who you have to be.
             </p>
           </div>
 
+          <details class="why-this-hits">
+            <summary>🔎 What your body recognizes here</summary>
+            <div class="why-this-hits-content">
+              Here you're hearing a nervous system slowly stand down. Gottman's research talks about the difference between <strong>flooded states</strong> (heart rate up, defenses on, scanning for danger) and regulated ones. This track sits right in that transition.<br><br>
+              Instead of treating every question as a threat, the body starts to run a new experiment: What if this moment isn't about to hurt me? The partner isn't rescuing or over-explaining — they're just consistently present, which gives the nervous system enough evidence to stop bracing.<br><br>
+              This is where safety stops being a concept and becomes a felt experience: shoulders drop, breath deepens, your partner's voice sounds like information instead of a weapon. The lyrics are about finally recognizing, I don't have to rehearse my escape while you're loving me.
+            </div>
+          </details>
+
           <details class="lyrics">
             <summary>
-              <span>Show full lyrics · “I Don’t Hear Danger In Your Voice”</span>
+              <span>Show full lyrics · "I Don't Hear Danger In Your Voice"</span>
               <span class="chevron">⌄</span>
             </summary>
             <pre>
@@ -1620,9 +1759,18 @@ Turns out safety isn’t silence — it’s the space where love can burst.
             </p>
           </div>
 
+          <details class="why-this-hits">
+            <summary>🔎 How this track turns love into architecture</summary>
+            <div class="why-this-hits-content">
+              By the time you reach this track, the relationship is no longer organized around "Will you leave?" but "What are we building?" Gottman would call this moving from <strong>crisis management to shared meaning</strong> — where the relationship becomes a place you design together, not a shelter you're afraid to lose.<br><br>
+              Here, awareness turns into action. The couple isn't just naming patterns; they're making different choices: repair instead of retreat, design instead of damage control. The old survival roles (the interpreter, the historian, the general) don't run the show anymore.<br><br>
+              The track sits in the energy of two people with "two hands on the wheel," choosing each other with clear eyes. It's not about proving you're safe — it's about using that safety as a launchpad for a future you both actually want.
+            </div>
+          </details>
+
           <details class="lyrics" id="all-lyrics">
             <summary>
-              <span>Show full lyrics · “We Don’t Flinch We Build”</span>
+              <span>Show full lyrics · "We Don't Flinch We Build"</span>
               <span class="chevron">⌄</span>
             </summary>
             <pre>
@@ -1724,6 +1872,252 @@ It’s the blueprint for progression.
             </pre>
           </details>
         </section>
+
+        <!-- Breath Checkpoint -->
+        <div class="breath-checkpoint">
+          <div class="breath-checkpoint-title">Pause Point</div>
+          <div class="breath-checkpoint-text">
+            Notice what your body feels like after hearing this.<br>
+            If you didn't brace, that's data.
+          </div>
+        </div>
+
+        <!-- CHAMBER IV -->
+        <section class="story" id="chamber-4">
+          <div class="chamber-watermark integration"></div>
+          <div class="story-header">
+            <div class="story-title-block">
+              <h2>Chamber IV</h2>
+              <h3>After We Learned to Hear Each Other</h3>
+              <p class="story-tagline">
+                Theme: love as competence, not emergency — when connection becomes the new normal.
+              </p>
+            </div>
+            <div class="badge-row">
+              <div class="badge">Secure Functioning</div>
+              <div class="badge">Trust as Competence</div>
+              <div class="badge badge-pulse">The New Normal</div>
+            </div>
+          </div>
+
+          <div class="player-card">
+            <div>
+              <div class="player-meta-title">When love is no longer an emergency</div>
+              <div class="player-meta-sub">
+                "After We Learned to Hear Each Other" — the quiet revolution of a love that doesn't pray for proof of its survival.
+              </div>
+              <div class="pill-row">
+                <div class="pill">SwampHop</div>
+                <div class="pill">88 BPM</div>
+                <div class="pill">Confident Calm</div>
+              </div>
+            </div>
+            <div class="player-controls">
+              <div class="player-progress-section">
+                <div class="scrub-bar-container">
+                  <div class="time-display" data-player="integration" data-type="current">0:00</div>
+                  <div class="scrub-bar-wrapper" data-player="integration">
+                    <div class="scrub-bar-progress" data-player="integration"></div>
+                  </div>
+                  <div class="time-display" data-player="integration" data-type="total">0:00</div>
+                </div>
+                <div class="visualizer" data-player="integration">
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                  <div class="visualizer-bar"></div>
+                </div>
+              </div>
+              <div class="player-selectors">
+                <div class="selector-group">
+                  <div class="selector-label">Version</div>
+                  <div class="selector-buttons" data-player="integration" data-type="version">
+                    <button class="selector-btn version-btn active" data-version="1">Version 1</button>
+                    <button class="selector-btn version-btn" data-version="2">Version 2</button>
+                  </div>
+                </div>
+              </div>
+              <div class="player-buttons">
+                <button class="player-btn play" data-player="integration" data-action="play">
+                  <span>▶</span> Play
+                </button>
+                <button class="player-btn pause" data-player="integration" data-action="pause" style="display: none;">
+                  <span>⏸</span> Pause
+                </button>
+                <button class="player-btn stop" data-player="integration" data-action="stop">
+                  <span>⏹</span> Stop
+                </button>
+                <button class="selector-btn" data-player="integration" data-action="favorite" title="Mark as favorite">
+                  <span>★</span> Favorite
+                </button>
+              </div>
+              <div class="player-status" data-player="integration">Ready to play</div>
+              <audio id="audioIntegrationLocal" preload="metadata" style="display: none;"></audio>
+            </div>
+          </div>
+
+          <div class="script-block">
+            <div class="script-heading">EchoStory · Spoken Narrative</div>
+
+            <p>
+              <strong>[Intro | gentle tape hiss · piano chords that resolve instead of suspend]</strong><br>
+              We used to speak in riddles born from where we'd been,
+              Every sentence was a shelter, every breath a hidden win.
+              But somewhere in the stillness, when we stopped preparing harm,
+              We woke up to a language where the truth had no alarm.
+            </p>
+
+            <p>
+              This final chamber lives in the afterglow of the whole arc: once defensiveness, fear, and raw survival aren't driving. In Gottman terms, it's what life can feel like when negative sentiment override has loosened its grip and conflict isn't automatically coded as threat.
+            </p>
+
+            <p class="script-line-label">The New Normal</p>
+            <p>
+              The track doesn't celebrate perfection — it rests in competence. Both partners can hear each other without translating everything through old pain. There's less monitoring and more curiosity, less scanning for danger and more co-authoring of reality.
+            </p>
+
+            <p>
+              For many listeners, this will feel strangely calm. That's the point. It's what happens when love is no longer an emergency, but an environment: two nervous systems that have learned to treat each other as home base instead of enemy territory.
+            </p>
+
+            <p>
+              The General put down his weapons, the Historian closed the book, the Interpreter lost the script — and for the first time, we just looked. Funny how love changes shape when the past stops driving choices. Turns out forever isn't distance, it's just two aligned voices.
+            </p>
+          </div>
+
+          <details class="why-this-hits">
+            <summary>🔎 Why this feels like a new normal</summary>
+            <div class="why-this-hits-content">
+              This song lives in the afterglow of the whole arc: once defensiveness, fear, and raw survival aren't driving. In Gottman terms, it's what life can feel like when <strong>negative sentiment override has loosened its grip</strong> and conflict isn't automatically coded as threat.<br><br>
+              The track doesn't celebrate perfection — it rests in competence. Both partners can hear each other without translating everything through old pain. There's less monitoring and more curiosity, less scanning for danger and more co-authoring of reality.<br><br>
+              For many listeners, this will feel strangely calm. That's the point. It's what happens when love is no longer an emergency, but an environment: two nervous systems that have learned to treat each other as home base instead of enemy territory.
+            </div>
+          </details>
+
+          <details class="lyrics">
+            <summary>
+              <span>Show full lyrics · "After We Learned to Hear Each Other"</span>
+              <span class="chevron">⌄</span>
+            </summary>
+            <pre>
+[Intro | gentle tape hiss · piano chords that resolve instead of suspend]
+We used to speak in riddles born from where we'd been,
+Every sentence was a shelter, every breath a hidden win.
+But somewhere in the stillness, when we stopped preparing harm,
+We woke up to a language where the truth had no alarm.
+
+[Hook | layered vocals · subtle choir · no tension in the drums]
+After we learned to hear each other,
+Love stopped sounding like a test.
+My history stopped asking questions
+Your presence didn't have to guess.
+There was nothing left to weaponize,
+No ghosts left standing guard —
+After we learned to hear each other,
+Connection wasn't hard.
+
+[Verse 1 | mid-tempo · grounded cadence · low-end warmth]
+There was a time I'd brace my heartbeat
+Like I owed my fear a debt,
+Turned your voice into a verdict
+On a crime we never met.
+Every sigh was speculation,
+Every pause a sharpened knife —
+My brain rehearsed abandonment
+Inside a quiet life.
+
+But knowledge never saved me,
+It just labeled every scar —
+Till I stopped defending history
+Like it owned who we are.
+
+[Pre-Hook | soft percussion removed, then reintroduced]
+You didn't ask to be my therapist,
+And I ain't asking you to fix me.
+I just caught the moment where the past
+Stopped speaking for my body.
+
+[Hook | fuller instrumentation]
+After we learned to hear each other,
+Love stopped sounding like a test.
+My history stopped asking questions
+Your presence didn't have to guess.
+There was nothing left to weaponize,
+No ghosts left standing guard —
+After we learned to hear each other,
+Connection wasn't hard.
+
+[Verse 2 | bigger sonic field · blueprint motif returns quietly]
+Now we talk like architects
+Who know the load our beams can take,
+Not soldiers mapping exits
+Just in case the trust was fake.
+Your truth don't trigger mine now,
+My breath ain't built for war —
+We got room for revelation
+I've never felt before.
+
+It ain't perfect, it's just honest —
+But honest learned to stay.
+That's the quiet revolution
+Of a love that doesn't pray
+For proof of its survival
+Every time the tone shifts weight —
+Now we meet inside the moment
+And let presence calibrate.
+
+[Bridge | whispered confidence · no fear in the delivery]
+The General put down his weapons,
+The Historian closed the book,
+The Interpreter lost the script —
+And for the first time, we just looked.
+
+[Final Hook | triumphant but not loud, clarity instead of fireworks]
+After we learned to hear each other,
+There was nothing left to fear.
+Your voice came in as information,
+Not a prophecy to clear.
+No survival in the dialogue,
+No performance in the part —
+After we learned to hear each other,
+We finally learned the heart.
+
+[Outro | heartbeat settles · no dissonance]
+Funny how love changes shape
+When the past stops driving choices —
+Turns out forever isn't distance,
+It's just two aligned voices.
+            </pre>
+          </details>
+        </section>
+
+        <!-- Gottman Link Section -->
+        <div class="gottman-link-section">
+          <div class="gottman-link-title">Want relationship tools based on what these tracks taught your nervous system?</div>
+          <div class="gottman-link-text">
+            Explore the Gottman Foundations — proven methods to build stronger, lasting connections.
+          </div>
+          <a href="https://www.gottman.com/" target="_blank" rel="noopener noreferrer" class="gottman-link-btn">
+            <span>Explore Gottman Institute</span>
+            <span>→</span>
+          </a>
+        </div>
       </div>
 
       <!-- Right: Timeline / Navigation -->
@@ -1753,15 +2147,24 @@ It’s the blueprint for progression.
             <div class="timeline-text">
               <div class="timeline-title">Chamber III · Build</div>
               <div class="timeline-tag">
-                We don’t flinch · We architect the future
+                We don't flinch · We architect the future
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item" data-target="chamber-4">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">
+              <div class="timeline-title">Chamber IV · Integration</div>
+              <div class="timeline-tag">
+                Love as competence · The new normal
               </div>
             </div>
           </div>
         </div>
 
         <p class="tiny-caption">
-          Click any chamber to jump, or use “Play EchoStory Flow” to hear the
-          full narrative arc with all three tracks back-to-back.
+          Click any chamber to jump, or use "Play EchoStory Flow" to hear the
+          full narrative arc with all four tracks back-to-back.
         </p>
       </aside>
     </main>
@@ -1772,8 +2175,9 @@ It’s the blueprint for progression.
     const audioChaos = document.getElementById("audioChaosV1");
     const audioDanger = document.getElementById("audioDangerV1");
     const audioBuild = document.getElementById("audioBuildV1");
+    const audioIntegration = document.getElementById("audioIntegrationV1");
 
-    const sequence = [audioChaos, audioDanger, audioBuild];
+    const sequence = [audioChaos, audioDanger, audioBuild, audioIntegration];
 
     function stopAllSequence() {
       sequence.forEach(a => {
@@ -1789,7 +2193,7 @@ It’s the blueprint for progression.
       target.currentTime = 0;
       target.play().catch(() => {});
       // Scroll to the corresponding section if it exists
-      const sectionId = index === 0 ? "chamber-1" : index === 1 ? "chamber-2" : "chamber-3";
+      const sectionId = index === 0 ? "chamber-1" : index === 1 ? "chamber-2" : index === 2 ? "chamber-3" : "chamber-4";
       const section = document.getElementById(sectionId);
       if (section) {
         section.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1831,6 +2235,13 @@ It’s the blueprint for progression.
         v2: document.getElementById("audioBuildV2"),
         master: audioBuild,
         name: "Builder Mode"
+      },
+      integration: {
+        audio: document.getElementById("audioIntegrationLocal"),
+        v1: document.getElementById("audioIntegrationV1"),
+        v2: document.getElementById("audioIntegrationV2"),
+        master: audioIntegration,
+        name: "Integration"
       }
     };
 
@@ -2088,9 +2499,11 @@ It’s the blueprint for progression.
         });
 
         // Stop master sequence players
-        [audioChaos, audioDanger, audioBuild].forEach(a => {
-          a.pause();
-          a.currentTime = 0;
+        [audioChaos, audioDanger, audioBuild, audioIntegration].forEach(a => {
+          if (a) {
+            a.pause();
+            a.currentTime = 0;
+          }
         });
 
         if (action === 'play') {
@@ -2184,6 +2597,7 @@ It’s the blueprint for progression.
       document.getElementById("chamber-1"),
       document.getElementById("chamber-2"),
       document.getElementById("chamber-3"),
+      document.getElementById("chamber-4"),
     ];
 
     const stateTransitionItems = document.querySelectorAll('.state-transition-item');
